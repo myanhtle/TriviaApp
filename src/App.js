@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
-function App() {
+export default function App() {
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    fetch("https://opentdb.com/api.php?amount=10")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setQuestions(res.results);
+      });
+  }, []);
+
+  const handleCorrectSubmit = e => {
+    alert('Correct!');
+  }
+
+  const handleWrongSubmit = e => {
+    alert('Incorrect. Try Again.')
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {questions.map((question) => (
+        <ul>
+          <div>
+           {question.question} 
+          </div>
+          <div>
+            {question.incorrect_answers.map(ans => <button type='submit' onClick={handleWrongSubmit}>{ans}</button>)}
+            <button type='submit' onClick={handleCorrectSubmit}>{question.correct_answer}</button>
+          </div>
+        </ul>
+      ))}
     </div>
   );
 }
-
-export default App;
