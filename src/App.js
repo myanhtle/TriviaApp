@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
 import "./App.css";
 
 export default function App() {
@@ -62,32 +63,31 @@ export default function App() {
       <div>
         <h1 className="numCorrect-Display">{numCorrect} Correct</h1>
       </div>
-      <ul>
-        {questions.map((question) => (
-          <div>
-            <div>{question.question}</div>
-            {question.answers.map((a) =>
-              a === question.correct ? (
-                <button
-                  disabled={question.completed}
-                  onClick={(event) =>
-                    handleCorrectSubmit(event, question.index)
-                  }
-                >
-                  {a}
-                </button>
-              ) : (
-                <button
-                  disabled={question.completed}
-                  onClick={(event) => handleWrongSubmit(event, question.index)}
-                >
-                  {a}
-                </button>
-              )
-            )}
-          </div>
-        ))}
-      </ul>
+
+      {questions.map((question) => (
+        <div className="flex-container">
+          <div>{question.question}</div>
+          {question.answers.map((a) =>
+            a === question.correct ? (
+              <Button
+                color="primary"
+                disabled={question.completed}
+                onClick={(event) => handleCorrectSubmit(event, question.index)}
+              >
+                {a}
+              </Button>
+            ) : (
+              <Button
+                color="primary"
+                disabled={question.completed}
+                onClick={(event) => handleWrongSubmit(event, question.index)}
+              >
+                {a}
+              </Button>
+            )
+          )}
+        </div>
+      ))}
     </div>
   );
 }
