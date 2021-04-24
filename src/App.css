@@ -1,3 +1,23 @@
+body {
+  background-color: rgb(252, 236, 217);
+}
+
 .numCorrect-Display {
-  margin-left: 50px;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bolder;
+  color: green;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container > div {
+  text-align: center;
+  font-size: x-large;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  margin: 10px;
 }
